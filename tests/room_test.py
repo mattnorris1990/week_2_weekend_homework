@@ -34,17 +34,15 @@ class TestRoom(unittest.TestCase):
         self.room_1.add_guest_to_guest_list(self.guest_1)
         self.room_1.add_guest_to_guest_list(self.guest_2)
         self.room_1.add_guest_to_guest_list(self.guest_3)
-        self.room_1.add_guest_to_guest_list(self.guest_4)
-        self.assertEqual(["Stuart", "John", "Keith", "Kris"], self.room_1.guest_list)
+        self.assertEqual(["Stuart", "John", "Keith"], self.room_1.guest_list)
 
     def test_remove_guest_from_guest_list(self):
         self.room_1.add_guest_to_guest_list(self.guest_1)
         self.room_1.add_guest_to_guest_list(self.guest_2)
         self.room_1.add_guest_to_guest_list(self.guest_3)
-        self.room_1.add_guest_to_guest_list(self.guest_4)
-        self.assertEqual(["Stuart", "John", "Keith", "Kris"], self.room_1.guest_list)
+        self.assertEqual(["Stuart", "John", "Keith"], self.room_1.guest_list)
         self.room_1.remove_guest_from_guest_list(self.guest_3)
-        self.assertEqual(["Stuart", "John", "Kris"], self.room_1.guest_list)
+        self.assertEqual(["Stuart", "John"], self.room_1.guest_list)
 
     def test_add_song_to_room(self):
         self.room_1.add_song_to_song_list(self.song_1)
@@ -56,3 +54,11 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(["Take on Me", "Bodies"], self.room_1.song_list)
         self.room_1.remove_song_from_song_list(self.song_1)
         self.assertEqual(["Bodies"], self.room_1.song_list)
+
+    def test_room_capacity_reached(self):
+        self.room_1.add_guest_to_guest_list(self.guest_1)
+        self.room_1.add_guest_to_guest_list(self.guest_2)
+        self.room_1.add_guest_to_guest_list(self.guest_3)
+        self.room_1.add_guest_to_guest_list(self.guest_4)
+        self.assertEqual(["Stuart", "John", "Keith"], self.room_1.guest_list)
+        self.assertEqual("room full", self.room_1.add_guest_to_guest_list(self.guest_4))
