@@ -72,3 +72,12 @@ class TestRoom(unittest.TestCase):
     def test_check_guest_has_paid(self):
         self.room_1.add_guest_to_guest_list(self.guest_1)
         self.assertEqual(0, self.guest_1.wallet)
+
+    def test_check_till_amount(self):
+        self.room_1.add_guest_to_guest_list(self.guest_1)
+        self.assertEqual(10, self.room_1.till)
+
+    def test_check_till_amount_multiple(self):
+        self.room_1.add_guest_to_guest_list(self.guest_1)
+        self.room_1.add_guest_to_guest_list(self.guest_2)
+        self.assertEqual(20, self.room_1.till)

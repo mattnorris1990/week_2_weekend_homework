@@ -7,9 +7,11 @@ class Room:
         self.booking_cost = input_booking_cost
         self.guest_list = []
         self.song_list = []
+        self.till = 0
 
     def guest_payment_for_room(self, guest_to_pay):
         guest_to_pay.wallet -= self.booking_cost
+        self.till += self.booking_cost
 
     def add_guest_to_guest_list(self, guest_to_add):
         if guest_to_add.wallet >= self.booking_cost:
