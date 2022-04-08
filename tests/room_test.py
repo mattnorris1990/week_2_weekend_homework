@@ -15,10 +15,11 @@ class TestRoom(unittest.TestCase):
         self.song_3 = Song("Bodies", "Drowning Pool")
         self.song_4 = Song("Since U Been Gone", "Kelly Clarkson")
 
-        self.guest_1 = Guest("Stuart", 10)
-        self.guest_2 = Guest("John", 15)
-        self.guest_3 = Guest("Keith", 20)
-        self.guest_4 = Guest("Kris", 25)
+        self.guest_1 = Guest("Stuart", 10, "Take on Me")
+        self.guest_2 = Guest("John", 15, "Wuthering Heights")
+        self.guest_3 = Guest("Keith", 20, "Bodies")
+        self.guest_4 = Guest("Kris", 25, "Since U Been Gone")
+        self.guest_5 = Guest("Matt", 5, "Kiss From a Rose")
 
     def test_room_name(self):
         self.assertEqual("Room 1", self.room_1.name)
@@ -64,7 +65,6 @@ class TestRoom(unittest.TestCase):
         self.assertEqual("room full", self.room_1.add_guest_to_guest_list(self.guest_4))
 
     def test_check_guest_can_afford(self):
-        self.guest_5 = Guest("Matt", 5)
         self.room_1.add_guest_to_guest_list(self.guest_1)
         self.room_1.add_guest_to_guest_list(self.guest_5)
         self.assertEqual(["Stuart"], self.room_1.guest_list)
