@@ -6,19 +6,19 @@ from src.song import *
 
 class TestRoom(unittest.TestCase):
     def setUp(self):
-        self.room_1 = Room("Room 1", 3)
-        self.room_2 = Room("Room 2", 5)
-        self.room_2 = Room("Room 3", 7)
+        self.room_1 = Room("Room 1", 3, 10)
+        self.room_2 = Room("Room 2", 5, 15)
+        self.room_2 = Room("Room 3", 7, 20)
 
         self.song_1 = Song("Take on Me", "a-ha")
         self.song_2 = Song("Wuthering Heights", "Kate Bush")
         self.song_3 = Song("Bodies", "Drowning Pool")
         self.song_4 = Song("Since U Been Gone", "Kelly Clarkson")
 
-        self.guest_1 = Guest("Stuart")
-        self.guest_2 = Guest("John")
-        self.guest_3 = Guest("Keith")
-        self.guest_4 = Guest("Kris")
+        self.guest_1 = Guest("Stuart", 10)
+        self.guest_2 = Guest("John", 15)
+        self.guest_3 = Guest("Keith", 20)
+        self.guest_4 = Guest("Kris", 25)
 
     def test_room_name(self):
         self.assertEqual("Room 1", self.room_1.name)
@@ -62,3 +62,9 @@ class TestRoom(unittest.TestCase):
         self.room_1.add_guest_to_guest_list(self.guest_4)
         self.assertEqual(["Stuart", "John", "Keith"], self.room_1.guest_list)
         self.assertEqual("room full", self.room_1.add_guest_to_guest_list(self.guest_4))
+
+    def test_check_guest_can_afford(self):
+        self.guest_5 = Guest("Matt", 5)
+        self.room_1.add_guest_to_guest_list(self.guest_1)
+        self.room_1.add_guest_to_guest_list(self.guest_5)
+        self.assertEqual(["Stuart"], self.room_1.guest_list)
