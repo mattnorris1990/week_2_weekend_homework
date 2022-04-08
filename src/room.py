@@ -1,4 +1,5 @@
 from src.guest import *
+from src.drink import *
 
 class Room:
     def __init__(self, input_name, input_capacity, input_booking_cost):
@@ -8,6 +9,7 @@ class Room:
         self.guest_list = []
         self.song_list = []
         self.till = 0
+        self.bar = []
 
     def guest_payment_for_room(self, guest_to_pay):
         guest_to_pay.wallet -= self.booking_cost
@@ -31,3 +33,18 @@ class Room:
 
     def remove_song_from_song_list(self, song_to_remove):
         self.song_list.remove(song_to_remove.name)
+
+    def add_drink_to_bar(self, drink_to_add):
+        if drink_to_add.stock > 0:
+            self.bar.append(drink_to_add.name)
+
+    def sell_drink(self, drink_to_sell, input_guest):
+        if input_guest.wallet >= drink_to_sell.price:
+            self.bar.remove(drink_to_sell.name)
+            drink_to_sell.stock -= 1
+            input_guest.wallet -= drink_to_sell.price
+            self.till += drink_to_sell.price
+        else:
+            return "cannot afford drink"
+
+

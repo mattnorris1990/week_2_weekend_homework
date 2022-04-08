@@ -3,6 +3,7 @@ import unittest
 from src.room import *
 from src.guest import *
 from src.song import *
+from src.drink import *
 
 class TestRoom(unittest.TestCase):
     def setUp(self):
@@ -20,6 +21,10 @@ class TestRoom(unittest.TestCase):
         self.guest_3 = Guest("Keith", 20, "Bodies")
         self.guest_4 = Guest("Kris", 25, "Since U Been Gone")
         self.guest_5 = Guest("Matt", 5, "Kiss From a Rose")
+
+        self.drink_1 = Drink("Screwdriver", 3, 10)
+        self.drink_2 = Drink("Sex on the Beach", 4, 2)
+        self.drink_3 = Drink("White Russian", 5, 5)
 
     def test_room_name(self):
         self.assertEqual("Room 1", self.room_1.name)
@@ -69,6 +74,9 @@ class TestRoom(unittest.TestCase):
         self.room_1.add_guest_to_guest_list(self.guest_5)
         self.assertEqual(["Stuart"], self.room_1.guest_list)
 
+    def test_check_guest_can_afford_return(self):
+        self.assertEqual("cannot afford room", self.room_1.add_guest_to_guest_list(self.guest_5))
+
     def test_check_guest_has_paid(self):
         self.room_1.add_guest_to_guest_list(self.guest_1)
         self.assertEqual(0, self.guest_1.wallet)
@@ -81,3 +89,16 @@ class TestRoom(unittest.TestCase):
         self.room_1.add_guest_to_guest_list(self.guest_1)
         self.room_1.add_guest_to_guest_list(self.guest_2)
         self.assertEqual(20, self.room_1.till)
+
+    def test_add_drink_to_bar(self):
+        self.room_1.add_drink_to_bar(self.drink_1)
+        self.assertEqual(["Screwdriver"], self.room_1.bar)
+
+    def test_sell_drink(self):
+        self.room_1.add_drink_to_bar(self.drink_1)
+        self.room_1.add_drink_to_bar(self.drink_2)
+        self.room_1.sell_drink(self.drink_1, self.guest_1)
+        self.assertEqual(["Sex on the Beach"], self.room_1.bar)
+        self.assertEqual(9, self.drink_1.stock)
+        self.assertEqual(7, self.guest_1.wallet)
+        self.assertEqual(3, self.room_1.till)
