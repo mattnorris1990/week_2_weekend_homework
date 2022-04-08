@@ -4,3 +4,6 @@ class Room:
         self.capacity = input_capacity
         self.guest_list = []
         self.song_list = []
+
+    def add_guest_to_guest_list(self, guest_to_add):
+        self.guest_list.append(guest_to_add.name)
