@@ -117,3 +117,10 @@ class TestRoom(unittest.TestCase):
         self.room_1.add_guest_to_guest_list(self.guest_3)
         self.room_1.add_guest_to_guest_list(self.guest_4)
         self.assertEqual(["Kris"], self.room_1.waiting_list)
+
+    def test_clear_room_guest_list(self):
+        self.room_1.add_guest_to_guest_list(self.guest_1)
+        self.room_1.add_guest_to_guest_list(self.guest_2)
+        self.room_1.add_guest_to_guest_list(self.guest_3)
+        self.room_1.add_guest_to_guest_list(self.guest_4)
+        self.assertEqual(None, self.room_1.clear_guest_list())

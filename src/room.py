@@ -52,6 +52,7 @@ class Room:
         else:
             return "drink not available"
 
-    
+    def clear_guest_list(self):
+        self.guest_list.clear()
 
 
