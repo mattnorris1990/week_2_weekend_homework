@@ -67,7 +67,7 @@ class TestRoom(unittest.TestCase):
         self.room_1.add_guest_to_guest_list(self.guest_3)
         self.room_1.add_guest_to_guest_list(self.guest_4)
         self.assertEqual(["Stuart", "John", "Keith"], self.room_1.guest_list)
-        self.assertEqual("room full", self.room_1.add_guest_to_guest_list(self.guest_4))
+        self.assertEqual("room full - added to waiting list", self.room_1.add_guest_to_guest_list(self.guest_4))
 
     def test_check_guest_can_afford(self):
         self.room_1.add_guest_to_guest_list(self.guest_1)
@@ -110,3 +110,10 @@ class TestRoom(unittest.TestCase):
     def test_sell_drink_not_available(self):
         self.room_1.add_drink_to_bar(self.drink_3)
         self.assertEqual("drink not available", self.room_1.sell_drink(self.drink_1, self.guest_1))
+
+    def test_add_to_waiting_list(self):
+        self.room_1.add_guest_to_guest_list(self.guest_1)
+        self.room_1.add_guest_to_guest_list(self.guest_2)
+        self.room_1.add_guest_to_guest_list(self.guest_3)
+        self.room_1.add_guest_to_guest_list(self.guest_4)
+        self.assertEqual(["Kris"], self.room_1.waiting_list)

@@ -10,6 +10,7 @@ class Room:
         self.song_list = []
         self.till = 0
         self.bar = []
+        self.waiting_list = []
 
     def guest_payment_for_room(self, guest_to_pay):
         guest_to_pay.wallet -= self.booking_cost
@@ -21,7 +22,8 @@ class Room:
                 self.guest_payment_for_room(guest_to_add)
                 self.guest_list.append(guest_to_add.name)
             else:
-                return "room full"
+                self.waiting_list.append(guest_to_add.name)
+                return "room full - added to waiting list"
         else:
             return "cannot afford room"
 
@@ -49,5 +51,7 @@ class Room:
                 return "cannot afford drink"
         else:
             return "drink not available"
+
+    
 
 
