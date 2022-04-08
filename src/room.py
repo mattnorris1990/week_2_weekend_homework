@@ -55,4 +55,8 @@ class Room:
     def clear_guest_list(self):
         self.guest_list.clear()
 
+    def move_room(self, original_room, new_room):
+        new_room.guest_list.extend(original_room.guest_list)
+        self.clear_guest_list
+
 
