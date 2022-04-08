@@ -7,3 +7,7 @@ class Room:
 
     def add_guest_to_guest_list(self, guest_to_add):
         self.guest_list.append(guest_to_add.name)
+
+
+    def remove_guest_from_guest_list(self, guest_to_remove):
+        self.guest_list.remove(guest_to_remove.name)

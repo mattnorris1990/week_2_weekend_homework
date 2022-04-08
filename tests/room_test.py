@@ -36,3 +36,12 @@ class TestRoom(unittest.TestCase):
         self.room_1.add_guest_to_guest_list(self.guest_3)
         self.room_1.add_guest_to_guest_list(self.guest_4)
         self.assertEqual(["Stuart", "John", "Keith", "Kris"], self.room_1.guest_list)
+
+    def test_remove_guest_from_guest_list(self):
+        self.room_1.add_guest_to_guest_list(self.guest_1)
+        self.room_1.add_guest_to_guest_list(self.guest_2)
+        self.room_1.add_guest_to_guest_list(self.guest_3)
+        self.room_1.add_guest_to_guest_list(self.guest_4)
+        self.assertEqual(["Stuart", "John", "Keith", "Kris"], self.room_1.guest_list)
+        self.room_1.remove_guest_from_guest_list(self.guest_3)
+        self.assertEqual(["Stuart", "John", "Kris"], self.room_1.guest_list)
