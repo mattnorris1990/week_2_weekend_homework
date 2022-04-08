@@ -20,7 +20,7 @@ class TestRoom(unittest.TestCase):
         self.guest_2 = Guest("John", 15, "Wuthering Heights")
         self.guest_3 = Guest("Keith", 20, "Bodies")
         self.guest_4 = Guest("Kris", 25, "Since U Been Gone")
-        self.guest_5 = Guest("Matt", 5, "Kiss From a Rose")
+        self.guest_5 = Guest("Matt", 4, "Kiss From a Rose")
 
         self.drink_1 = Drink("Screwdriver", 3, 10)
         self.drink_2 = Drink("Sex on the Beach", 4, 2)
@@ -102,3 +102,11 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(9, self.drink_1.stock)
         self.assertEqual(7, self.guest_1.wallet)
         self.assertEqual(3, self.room_1.till)
+
+    def test_sell_drink_cant_afford(self):
+        self.room_1.add_drink_to_bar(self.drink_3)
+        self.assertEqual("cannot afford drink", self.room_1.sell_drink(self.drink_3, self.guest_5))
+
+    def test_sell_drink_not_available(self):
+        self.room_1.add_drink_to_bar(self.drink_3)
+        self.assertEqual("drink not available", self.room_1.sell_drink(self.drink_1, self.guest_1))

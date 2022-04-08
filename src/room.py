@@ -39,12 +39,15 @@ class Room:
             self.bar.append(drink_to_add.name)
 
     def sell_drink(self, drink_to_sell, input_guest):
-        if input_guest.wallet >= drink_to_sell.price:
-            self.bar.remove(drink_to_sell.name)
-            drink_to_sell.stock -= 1
-            input_guest.wallet -= drink_to_sell.price
-            self.till += drink_to_sell.price
+        if self.bar.count(drink_to_sell.name) != 0:
+            if input_guest.wallet >= drink_to_sell.price:
+                self.bar.remove(drink_to_sell.name)
+                drink_to_sell.stock -= 1
+                input_guest.wallet -= drink_to_sell.price
+                self.till += drink_to_sell.price
+            else:
+                return "cannot afford drink"
         else:
-            return "cannot afford drink"
+            return "drink not available"
 
 
